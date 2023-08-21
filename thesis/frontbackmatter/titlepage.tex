@@ -1,0 +1,58 @@
+%*******************************************************
+% Titlepage
+%*******************************************************
+\begin{titlepage}
+  \newgeometry{margin=1in}
+    \pdfbookmark[1]{\myTitle}{titlepage}
+    % if you want the titlepage to be centered, uncomment and fine-tune the line below (KOMA classes environment)
+    % \begin{addmargin}[0cm]{0cm} %[-1cm]{-3cm}
+    \begin{center}
+
+        \hfill
+        \vfill
+
+        \begingroup
+            % \color{CTtitle}\spacedallcaps{\myTitle} <- won't make 'using' lowercase
+            %  Exploring text representations for online misinformation
+            \huge
+            \color{CTtitle}{\textls[100]{EXPLORING TEXT REPRESENTATIONS} \\ \bigskip \smallskip
+            \textls[20]{\textcolor{black}{\MakeLowercase{\emph{for}}}} %\\ \medskip \medskip
+            \textls[100]{ONLINE MISINFORMATION}\xspace}
+        \endgroup
+
+        \bigskip \bigskip \bigskip \bigskip
+
+        \huge\adforn{21}
+
+        \bigskip \bigskip \bigskip \bigskip
+
+        \LARGE{\textls[100]{\spacedlowsmallcaps\myName}} \bigskip \bigskip % \spacedlowsmallcaps \textsc
+
+        \large{\myTime}
+
+        \vfill
+
+        \large
+
+        \emph{Thesis presented for the degree of} \\ \smallskip
+        \emph{\myDegree}
+
+        \bigskip
+
+        \emph{to the}
+
+        \bigskip
+
+        \emph{School of Electronics, Electrical Engineering} \\ \smallskip
+        \emph{and Computer Science}
+
+        \bigskip
+
+        \includegraphics[width=4cm]{gfx/QUB_Logo}
+
+        \vfill
+
+    \end{center}
+  % \end{addmargin}
+  \restoregeometry
+\end{titlepage}

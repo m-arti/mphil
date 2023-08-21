@@ -1,0 +1,42 @@
+%************************************************
+\chapter{Conclusion}\label{ch:conclusion}
+%************************************************
+
+One way to detect misinformation is by manual fact-checking. This task is typically done by trained experts who tend to be accurate in spotting fake news. There are, however, a few issues with this approach. Firstly, the high quantity and speed of fake news make it difficult for fact-checkers to keep up. Secondly, continuous exposure to misinformation can be harmful to an individual, or even lead them to believe it is true. Finally, fact-checkers have a degree of subjectivity, which can lead to inconsistent results, especially when dealing with complex or controversial topics.
+
+An alternative way of identifying fake news is by using computational methods. The application of \ac{NLP} and \ac{ML} techniques to do so is delivering increasingly better results so far. Supervised \ac{ML} models are more commonly used to detect fake news, but they rely on a large amount of labelled data.
+
+Fake news is becoming more cunning and even more similar to authentic news. Some of the features currently used to tell apart fake from real may not work well when the two are highly similar. For instance, it has been shown that representations based on writing style, are impractical when applied to machine-generated fake news. Therefore, there is also a need to innovate new text representations for distinguishing this type of news from legitimate news.
+
+\newthought{This thesis makes} the following main contributions to the current state of fake news detection:
+
+\begin{enumerate}
+  \item It develops a novel approach for obtaining robust text features from news articles based on the topics they discuss. This is particularly useful in circumstances where labelled data is scant or unavailable.
+
+  \item It demonstrates the effectiveness of this new representation in distinguishing between fake and real news articles. This is shown using both supervised (classification) and unsupervised (clustering) \ac{ML}. The latter approach helps in minimising the reliance on labelled datasets.
+\end{enumerate}
+
+These contributions were achieved through the design and implementation of three main experiments:
+
+\begin{enumerate}
+  \item This thesis explored word embeddings and sentiment features on short rumour and non-rumour texts. They did not show evidence of being capable of differentiating between the groups. Nonetheless, this study can be extended in different ways to better understand semantic and sentiment relations between rumours and non-rumours.
+
+  \item It investigated the coherence in the themes discussed in the opening and remaining sections of fake and authentic news articles. The themes were represented in the form of latent topics. This study culminated in the development of a novel text representation, which showed evidence of being able to distinguish fake from real news.
+
+  \item It exploited the topic features for misinformation detection, using classification and clustering methods. Although these experiments are preliminary, the results are promising and to some degree, substantiate the efficacy of topic representations.
+\end{enumerate}
+
+In its totality, this thesis contributes to researchers' ability to detect fake news computationally. However, further and deeper studies remain to be done.
+
+\section{Future work}
+\label{sec:6-future}
+
+There now exist word embedding models that are more advanced than \texttt{word2vec} and \texttt{InferSent}. The experiments carried out in \autoref{ch:word-embeddings} can be extended to take advantage of state-of-the-art language models such as \ac{BERT}. Language models pre-trained on short texts or tweets, such as \texttt{BERTweet}\sidecite{Nguyen:2020}, may perform better than the ones used in this research. Furthermore, concerning sentiment, it has only explored limited categories of it (positive, neutral, and negative). In future work, an expanded range of emotions can be studied.
+
+Other topic modelling tools may perform better than \ac{LDA} for a study similar to the one in \autoref{ch:thematic-coherence}. Such a tool may generate better topics as assessed through intrinsic and extrinsic measures. This will increase confidence in ascertaining the robustness of thematic coherence as a text representation. For example, \citeauthoryear{Egger:2022} carried out a detailed study of the strengths and weaknesses of different topic modelling methods for investigating \ac{OSN} text data. In this work, \ac{LDA}, \ac{NMF}, \texttt{top2vec},\sidecite{Angelov:2020} and \texttt{BERTopic}\sidecite{Grootendorst:2022} were compared. Additionally, other ways of extracting topics from articles can be explored. For instance, the articles could be split into multiple sections, rather than just two. This may improve the robustness of topic text representations, to make it more resilient to changes that can be made to increase the coherence of topics in fake news.
+
+\autoref{ch:clustering-and-classification} presents preliminary yet promising results on the evaluation of the utility of topic representations. Simple classification and clustering algorithms were used for this. In future work, however, a more novel technique can be devised to fully take advantage of the features used in this work. For example, beyond evaluating the purity of clusters, a complete unsupervised fake news detection model can be created and its performance can be evaluated against the state-of-the-art.
+
+Finally, the text representations explored in this thesis can be combined, or used with those in other studies, to detect fake news. Experiments can be set up to compare the performances of the topic and stylometric features, or to evaluate the utility of their combination. Future research can adopt multimodal misinformation detection to combine the text representations presented in this work with features from other types of media. Especially image and video,\sidecite{Mirsky:2021} which are becoming increasingly easier to fabricate using tools such as Generative Adversarial Networks.\sidecite{Goodfellow:2014} Future work may also evaluate if topic features are robust enough to accurately detect machine-generate fake news. This type of misinformation has the potential of becoming the primary way to create mis- and disinformation in the future.
+
+% end of chapter

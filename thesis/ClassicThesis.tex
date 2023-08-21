@@ -1,0 +1,257 @@
+% classicthesis.tex
+
+\RequirePackage{silence} %
+    \WarningFilter{scrreprt}{Usage of package `titlesec'}
+    %\WarningFilter{scrreprt}{Activating an ugly workaround}
+    \WarningFilter{titlesec}{Non standard sectioning command detected}
+
+\documentclass[
+oneside,openright,titlepage,numbersa=noenddot,%1headlines,
+                headinclude,footinclude,cleardoublepage=empty,abstract=on,
+                BCOR=5mm,paper=a4,fontsize=11pt]{scrreprt}
+
+%****************************************
+% Note: Make all your adjustments in here
+%****************************************
+\input{classicthesis-config}
+
+%***************
+% Bibliographies
+%***************
+\addbibresource{bibliography.bib}
+\addbibresource[label=ownpubs]{msdogo_publications.bib}
+
+%************
+% Hyphenation
+%************
+%\hyphenation{put special hyphenation here}
+
+% ******************
+% GO!GO!GO! MOVE IT!
+%*******************
+\usepackage[utf8]{inputenc}
+\usepackage{adforn}
+
+\usepackage{pbsi}
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-}
+\usepackage{hyperref}
+
+\usepackage[overload]{textcase}
+\usepackage[document]{ragged2e}
+
+\usepackage{placeins, rotating}
+\usepackage{subcaption, mwe}
+\usepackage[justification=centering]{caption}
+\usepackage{varwidth}
+
+% packages for algos and equations
+\usepackage{algorithm, algpseudocode, amsmath, amssymb, amsthm, mathtools, array, tabularx, calc}
+
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+% for aligning equation parameters (from: https://tex.stackexchange.com/questions/95838/how-to-write-a-perfect-equation-parameters-description)
+
+% rename bibliography section
+\renewcommand\bibname{References}
+\renewcommand{\refname}{References}
+
+\newlength{\conditionwd}
+\newenvironment{conditions}[1][where:]
+  {%
+   #1\tabularx{\textwidth-\widthof{#1}}[t]{
+     >{$}l<{$} @{${}={}$} X@{}
+   }%
+  }
+  {\endtabularx\\[\belowdisplayskip]}
+
+% \newenvironment{conditions*}
+%   {\par\vspace{\abovedisplayskip}\noindent
+%    \tabularx{\columnwidth}{>{$}l<{$} @{${}={}$} >{\raggedright\arraybackslash}X}}
+%   {\endtabularx\par\vspace{\belowdisplayskip}}
+
+% ——— functions
+% make date a clickable link to bib section
+% from https://tex.stackxchange.com/questions/282649/how-to-make-a-word-clickable-to-send-you-to-a-certain-reference-in-the-bibliogra
+% for sidenote-citing things with links (numbered)
+\newcommand{\citeDateToBib}[2]{(\hyperlink{cite.\therefsection @#1}{#2})}
+% for sidenote-citing definitions (numbered)
+\newcommand{\sidecitedefinition}[2]{\sidenote{#1 \citeDateToBib{#2}{\citeyear{#2}}, \citetitle{#2}}}
+% for sidenote-citing other things (numbered)
+\newcommand{\sidecite}[1]{\sidenote{\citeauthor{#1} \citeDateToBib{#1}{\citeyear{#1}}, \citetitle{#1}}}
+% for in-text or sidenote-citing author and date (linked to bib section) (numbered)
+\newcommand{\citeauthoryear}[1]{\citeauthor{#1} \citeDateToBib{#1}{\citeyear{#1}}}
+
+% ——— functions
+% for removing unwanted spaces (https://tex.stackexchange.com/questions/87509/removing-the-spaces-between-words)
+\newcommand{\RemoveSpaces}[1]{%
+  \begingroup
+  \spaceskip=1sp
+  \xspaceskip=1sp
+  #1%
+  \endgroup
+}
+% for labeling/referencing chapters, (sub-/subsub-)sections, etc.
+\addto\extrasenglish{%
+  \renewcommand{\chapterautorefname}{Chapter}%
+}
+\let\subsectionautorefname\sectionautorefname
+\let\subsubsectionautorefname\sectionautorefname
+% custom section ref with fancy silcrow
+\newcommand{\sectionref}[1]{\RemoveSpaces{\textsilcrow\hspace{0pt}\autoref{#1}}}
+% for sidenote epigraphs / quotations with/without link to source (unnumbered) {quote}{name}{url}{label}
+\newcommand{\sidequote}[4]{{\graffito{\RemoveSpaces{\emph{`#1'}} \medskip \vspace*{-\baselineskip} \begin{flushright}--- #2, ``\href{#3}{#4}'' \end{flushright}}}}
+
+% for algorithms
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} % rename Require to Input
+\renewcommand{\algorithmicensure}{\textbf{Output:}} % rename Ensure to Output
+
+% ——— fonts
+% use a different font (eg Baskerville) [https://tex.stackexchange.com/questions/100329/is-a-real-baskerville-font-available-for-latex]
+
+% load this before loading font: \usepackage[T1]{fontenc}
+% for CormorantGaramond: \usepackage{CormorantGaramond}
+% for EBGaramond \usepackage{ebgaramond}
+% for Baskerville: \usepackage{kpfonts,baskervald}
+
+\usepackage[T1]{fontenc}
+\usepackage[osf]{cochineal}
+\usepackage[cochineal]{newtxmath}
+\renewcommand{\textsilcrow}{{\fontencoding{TS1}\fontfamily{Cochineal-LF}\selectfont \char167}}
+
+% ———— for layout & styling
+% \usepackage[a4paper,showframe]{geometry}
+\usepackage[utf8]{inputenc}
+
+\usepackage{booktabs}  % for \toprule, \midrule, and \bottomrule
+\usepackage[table]{xcolor}
+\usepackage{graphicx, graphbox}
+\usepackage{microtype, eurosym}
+\usepackage[para, flushleft]{threeparttable}
+\renewcommand\TPTtagStyle{\itshape}
+
+\usepackage{nicematrix,enumitem}
+
+
+\usepackage{thmtools}
+\declaretheoremstyle[
+spaceabove=6pt, spacebelow=6pt,
+headfont=\normalfont\bfseries,
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont,
+postheadspace=0.6em,
+headpunct=:
+]{mystyle}
+\declaretheorem[style=mystyle, name=Hypothesis, preheadhook={\renewcommand{\thehyp}{H\textsubscript{\arabic{hyp}}}}]{hyp}
+
+\declaretheoremstyle[
+spaceabove=6pt, spacebelow=6pt,
+headfont=\normalfont\bfseries,
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont,
+postheadspace=0.6em,
+headpunct=:
+]{mystyle2}
+\declaretheorem[style=mystyle2, name=Conjecture, preheadhook={\renewcommand{\thehyp}{C\textsubscript{\arabic{con}}}}]{con}
+
+\usepackage{cleveref}
+\crefname{hyp}{hypothesis}{hypotheses}
+\Crefname{hyp}{Hypothesis}{Hypotheses}
+\setcounter{hyp}{-1}
+
+\crefname{con}{conjecture}{conjecture}
+\Crefname{con}{Conjecture}{Conjecture}
+\setcounter{con}{0}
+
+% \usepackage[T1]{fontenc}
+% \usepackage{charter}
+% \RequirePackage[charter]{mathdesign}
+
+% ——— Document begins
+\begin{document}
+\frenchspacing
+\raggedbottom
+\selectlanguage{american} % american ngerman
+%\renewcommand*{\bibname}{new name}
+%\setbibpreamble{}
+\pagenumbering{roman}
+\pagestyle{plain}
+
+
+%************
+% Frontmatter
+%************
+
+% \include{frontbackmatter/dirtytitlepage}
+\include{frontbackmatter/titlepage}
+\include{frontbackmatter/titleback}
+% \include{frontbackmatter/declaration}
+\cleardoublepage\include{frontbackmatter/dedication}
+% \cleardoublepage\include{frontbackmatter/Foreword}
+\cleardoublepage\include{frontbackmatter/abstract}
+% \cleardoublepage\include{frontbackmatter/publications}
+\cleardoublepage\include{frontbackmatter/acknowledgments}
+\cleardoublepage\include{frontbackmatter/contents}
+
+%***********
+% Mainmatter
+%***********
+
+\cleardoublepage
+\pagestyle{scrheadings}
+\pagenumbering{arabic}
+%\setcounter{page}{90}
+% use \cleardoublepage here to avoid problems with pdfbookmark
+
+% PART I
+\cleardoublepage
+% \ctparttext{[part description here]}
+\part{Fake News}\label{pt:part-1}
+\cleardoublepage
+\include{chapters/chapter01}
+\include{chapters/chapter02}
+
+% PART II
+\cleardoublepage
+% \ctparttext{[part description here]}
+\part{Contributions}\label{pt:part-2}
+\cleardoublepage
+%\addtocontents{toc}{\protect\clearpage} % <--- just debug stuff, ignore
+
+\include{chapters/chapter03}
+\include{chapters/chapter04}
+\include{chapters/chapter05}
+
+\part{Epilogue}\label{pt:part-3}
+\cleardoublepage
+\include{chapters/chapter06}
+
+
+%\include{multiToC} % <--- just debug stuff, ignore for your documents
+
+% **********
+% Backmatter
+%***********
+
+% PART III — APPENDIX
+% \appendix
+% do not run --> \renewcommand{\thechapter}{\alph{chapter}}
+% \cleardoublepage
+% \part{Appendix}
+
+% do not run --> \include{chapters/chapter0A}
+% do not run --> \include{chapters/chapter0B}
+
+%************************
+% Other Stuff in the Back
+%************************
+\cleardoublepage\include{frontbackmatter/bibliography}
+% \cleardoublepage\include{frontbackmatter/declaration}
+% \cleardoublepage\include{frontbackmatter/colophon}
+
+% ***************
+% End of document
+%****************
+\end{document}
+% ********************************************************************

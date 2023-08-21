@@ -1,0 +1,102 @@
+%******************
+% Table of Contents
+%******************
+\pagestyle{scrheadings}
+%\phantomsection
+\pdfbookmark[1]{\contentsname}{tableofcontents}
+\setcounter{tocdepth}{2} % <-- 2 includes up to subsections in the ToC
+\setcounter{secnumdepth}{3} % <-- 3 numbers up to subsubsections
+\manualmark
+\markboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}
+\tableofcontents
+\automark[section]{chapter}
+\renewcommand{\chaptermark}[1]{\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}}
+\renewcommand{\sectionmark}[1]{\markright{\textsc{\thesection}\enspace\spacedlowsmallcaps{#1}}}
+%**********************************
+% List of Figures and of the Tables
+%**********************************
+\clearpage
+% \pagestyle{empty} % Uncomment this line if your lists should not have any headlines with section name and page number
+\begingroup
+    \let\clearpage\relax
+    \let\cleardoublepage\relax
+    %****************
+    % List of Figures
+    %****************
+    %\phantomsection
+    %\addcontentsline{toc}{chapter}{\listfigurename}
+    \pdfbookmark[1]{\listfigurename}{lof}
+    \listoffigures
+
+    \vspace{8ex}
+
+    %***************
+    % List of Tables
+    %***************
+    %\phantomsection
+    %\addcontentsline{toc}{chapter}{\listtablename}
+    \pdfbookmark[1]{\listtablename}{lot}
+    \listoftables
+
+    \vspace{8ex}
+    % \newpage
+
+    %*******************
+    % List of Algorithms
+    %*******************
+    %\phantomsection
+    \addtocontents{loa}{\def\string\figurename{Algorithm}}
+    \listofalgorithms
+
+    \vspace{8ex}
+
+    %*****************
+    % List of Listings
+    %*****************
+    %\phantomsection
+    %\addcontentsline{toc}{chapter}{\lstlistlistingname}
+    % \pdfbookmark[1]{\lstlistlistingname}{lol}
+    % \lstlistoflistings
+    %
+    % \vspace{8ex}
+
+    %*********
+    % Acronyms
+    %*********
+    %\phantomsection
+    \pdfbookmark[1]{Acronyms}{acronyms}
+    \markboth{\spacedlowsmallcaps{Acronyms}}{\spacedlowsmallcaps{Acronyms}}
+    \chapter*{Acronyms}
+    \begin{acronym}[UMLX]
+        \acro{ABM}{agent-based model}
+        \acro{ADS}{American Dialect Society}
+        \acro{BERT}{Bidirectional Encoder Representations from Transformers}
+        \acro{BoW}{bag-of-words}
+        \acro{CDT}{Context Dimension Tree}
+        \acro{CNN}{Convolutional Neural Network}
+        \acro{kNN}{$k$-Nearest Neighbour}
+        \acro{LDA}{Latent Dirichlet Allocation}
+        \acro{LIWC}{Linguistic Inquiry and Word Count}
+        \acro{LSA}{Latent Semantic Analysis}
+        \acro{LSTM}{Long Short-Term Memory}
+        \acro{MID}{Misinformation Detection}
+        \acro{ML}{Machine Learning}
+        % \acro{MWD}{Merriam-Webster Dictionary}
+        \acro{NLP}{Natural Language Processing}
+        \acro{NMF}{Non-negative Matrix factorisation}
+        \acro{OED}{Oxford English Dictionary}
+        \acro{OSN}{Online Social Network}
+        \acro{PCA}{Principal Component Analysis}
+        \acro{PCFG}{Probabilistic Context-Free Grammar}
+        \acro{PoS}{parts-of-speech}
+        \acro{RNN}{Recurrent Neural Network}
+        \acro{RST}{Rhetorical Structure Theory}
+        \acro{SVD}{Singular Value Decomposition}
+        \acro{SVM}{Support Vector Machine}
+        \acro{TFIDF}{Term Frequency-Inverse Document Frequency}
+        \acro{tSNE}{$t$-distributed Stochastic Neighbor Embedding}
+        \acro{UMAP}{Uniform Manifold Approximation and Projection}
+        \acro{VAE}{Variational Autoencoder}
+    \end{acronym}
+
+\endgroup
